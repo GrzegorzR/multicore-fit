@@ -11,16 +11,17 @@ sinWithNoiseGenerator = SineWithNoiseGenerator.SineWithNoiseGenerator(0.1)
 
 tCounter = TCounter.TCunter(d)
 
-xes = randomGenerator.generate(5)
+xes = randomGenerator.generate(500)
 xes = sorted(xes)
 values = sineGenerator.generate(xes)
 noiseValues =sinWithNoiseGenerator.generate(xes)
-print tCounter.countT(values, noiseValues, 7)
+mhm= tCounter.countT(values, noiseValues, 6)
 
 
 print xes
 print values
 print noiseValues
+print mhm
 plt.interactive(False)
 plt.plot(xes, noiseValues)
 plt.plot(xes, values)
