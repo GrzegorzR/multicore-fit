@@ -1,5 +1,5 @@
 from counters import EucDistanceCounter, TCounter
-from generators import RandomArrayGenerator, SineDataGenerator,SineWithNoiseGenerator
+from generators import RandomArrayGenerator, SineDataGenerator, SineWithNoiseGenerator
 import matplotlib.pyplot as plt
 import time
 
@@ -7,15 +7,15 @@ import time
 d = EucDistanceCounter.EucDistanceCounter(2)
 randomGenerator = RandomArrayGenerator.RandomArrayGenerator()
 sineGenerator = SineDataGenerator.SineDataGenerator()
-sinWithNoiseGenerator = SineWithNoiseGenerator.SineWithNoiseGenerator(0.1)
+sinWithNoiseGenerator = SineWithNoiseGenerator.SineWithNoiseGenerator(1000)
 
 tCounter = TCounter.TCunter(d)
 
-xes = randomGenerator.generate(500)
+xes = randomGenerator.generate(100)
 xes = sorted(xes)
 values = sineGenerator.generate(xes)
 noiseValues =sinWithNoiseGenerator.generate(xes)
-mhm= tCounter.countT(values, noiseValues, 6)
+mhm= tCounter.countT(values, noiseValues, 3)
 
 
 print xes

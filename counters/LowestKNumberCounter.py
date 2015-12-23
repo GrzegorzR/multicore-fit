@@ -11,5 +11,5 @@ class LowestKNumberCounter:
         kthlowest = tmp[k]
         if kthlowest in arr1:
             return 1
-        else:
+        elif kthlowest in arr2:
             return 0
