@@ -36,8 +36,8 @@ class TCunter:
                 #print tmp
                 ithSum = ithSum + tmp
             sumT = sumT + ithSum
-        print sumT
+        #print sumT
         nominator = k*(len(arr1)+len(arr2))
-        print nominator
+        #print nominator
         return float(sumT)/float(nominator)
 
