@@ -20,7 +20,7 @@ class DistributionPlotter:
             xes = self.xgen.generate(arrLen)
             arr1 = self.gen1.generate(xes)
             arr2 = self.gen2.generate(xes)
-            result = self.disCounter.count(arr1, arr2, k)
+            result = self.disCounter.count(xes, arr1, arr2, k)
             disArr.append(result)
         n, bins, patches = plt.hist(disArr, 20, normed=1, facecolor='green', alpha=0.75)
 

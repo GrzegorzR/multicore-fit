@@ -12,8 +12,8 @@ class DistributionCounter:
         self.meanCounter = meanCounter
         self.varianceCounter = varianceCounter
 
-    def count(self, arr1, arr2, k):
-        T = self.tCounter.countT(arr1, arr2, k)
+    def count(self,xArr, arr1, arr2, k):
+        T = self.tCounter.countT(xArr, arr1, arr2, k)
         mean = self.meanCounter.count(arr1, arr2)
         variance = math.sqrt(self.varianceCounter.count(arr1, arr2, k))
         #print T

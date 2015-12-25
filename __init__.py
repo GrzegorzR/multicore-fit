@@ -7,8 +7,8 @@ import time
 
 
 xgen = RandomArrayGenerator.RandomArrayGenerator()
-gen1 = SineWithNoiseGenerator.SineWithNoiseGenerator(0.05)
-gen2 = SineWithNoiseGenerator.SineWithNoiseGenerator(0.05)
+gen1 = SineWithNoiseGenerator.SineWithNoiseGenerator(0.2)
+gen2 = SineWithNoiseGenerator.SineWithNoiseGenerator(0.2)
 #gen2 = SineWithNoiseGenerator.SineWithNoiseGenerator(0)
 
 d = EucDistanceCounter.EucDistanceCounter(2)
@@ -40,4 +40,4 @@ plt.show()
 #print d.count(1, 1.2)
 """
 
-distributionPlotter.plot(100, 5, 100)
+distributionPlotter.plot(1000, 5, 200)
