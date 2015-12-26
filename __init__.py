@@ -1,57 +1,70 @@
 from counters import EucDistanceCounter, TCounter, MeanCounter, VarianceCounter, DistributionCounter
-from generators import RandomArrayGenerator, SineDataGenerator, SineWithNoiseGenerator, GaussGenerator
+from generators import RandomArrayGenerator,  SineWithNoiseGenerator, GaussGenerator
 from plotters import DistributionPlotter
 import matplotlib.pyplot as plt
 import time
 
 
-
-
-
 def main():
-    xgen1 = RandomArrayGenerator.RandomArrayGenerator(-10,10)
-    xgen2 = RandomArrayGenerator.RandomArrayGenerator(-10,10)
-    gen1 = SineWithNoiseGenerator.SineWithNoiseGenerator(xgen1, 1)
-    gen2 = SineWithNoiseGenerator.SineWithNoiseGenerator(xgen1, 0.5)
-    #gen2 = SineWithNoiseGenerator.SineWithNoiseGenerator(0)
+    #plotGaussData     (2, 2, 2, 2, 1, 1, 1000)
+    #gaussDataHistogram(2, 2, 2, 2, 1, 1, 100, 200)
 
-    d = EucDistanceCounter.EucDistanceCounter(2)
-    meanCounter = MeanCounter.MeanCounter()
-    varianceCounter = VarianceCounter.VarianceCounter()
-    tCounter = TCounter.TCunter(d)
-    distributionCounter = DistributionCounter.DistributionCounter(tCounter, meanCounter, varianceCounter)
-
-    distributionPlotter = DistributionPlotter.DistributionPlotter( gen1, gen2, distributionCounter)
+    #plotSineData(0.5, 0.1, 1000)
+    sineDataHistogram(0.1, 0.1, 100, 200)
 
 
-    gen11 = GaussGenerator.GaussGenerator(5,5, 1)
-    gen12 = GaussGenerator.GaussGenerator(4,4, 1)
+def plotSineData(noise1, noise2, arrLen):
+    gen1, gen2 = prepareSineGenerators(noise1, noise2)
+    plotData(gen1, gen2, arrLen)
 
-    data1 = gen11.generateDataSample(500)
-    data2 = gen12.generateDataSample(500)
+def plotGaussData(x1, y1, x2, y2, sigma1, sigma2, arrLen):
+    gen1, gen2 = prepareGaussGenerators(x1, y1, x2, y2, sigma1, sigma2)
+    plotData(gen1, gen2, arrLen)
+
+def sineDataHistogram(noise1, noise2, arrLen, iterations):
+    gen1, gen2 = prepareSineGenerators(noise1, noise2)
+    plotResultHisogram(gen1, gen2, arrLen, iterations)
+
+def gaussDataHistogram(x1, y1, x2, y2, sigma1, sigma2, arrLen, iterations):
+    gen1, gen2 = prepareGaussGenerators(x1, y1, x2, y2, sigma1, sigma2)
+    plotResultHisogram(gen1, gen2, arrLen, iterations)
+
+
+
+
+def prepareSineGenerators(noise1, noise2):
+    xgen1 = RandomArrayGenerator.RandomArrayGenerator(-10, 10)
+    gen1 = SineWithNoiseGenerator.SineWithNoiseGenerator(xgen1, noise1)
+    gen2 = SineWithNoiseGenerator.SineWithNoiseGenerator(xgen1, noise2)
+    return gen1, gen2
+
+def prepareGaussGenerators(x1, y1, x2, y2, sigma1, sigma2):
+    gen1 = GaussGenerator.GaussGenerator(x1, y1, sigma1)
+    gen2 = GaussGenerator.GaussGenerator(x2, y2, sigma2)
+    return gen1, gen2
+
+def plotData(gen1, gen2, arrLen):
+    data1 = gen1.generateDataSample(arrLen)
+    data2 = gen2.generateDataSample(arrLen)
 
     plt.plot(data1.getX(), data1.getY(), 'ro')
     plt.plot(data2.getX(), data2.getY(), 'bo')
     plt.show()
 
-    #mhm = tCounter.countT(values, noiseValues, 5)
+def plotResultHisogram(gen1, gen2, arrLen, iterations):
+    distributionCounter = prepareDistributionCounter()
+    distributionPlotter = DistributionPlotter.DistributionPlotter(gen1, gen2, distributionCounter)
+    distributionPlotter.plot(arrLen, 10, iterations)
 
-    """
-    print xes
-    print values
-    print noiseValues
-    #print mhm
-    print distributionCounter.count( values, noiseValues, 5)
 
-    plt.interactive(False)
-    plt.plot(xes, noiseValues)
-    plt.plot(xes, values)
-    plt.show()
-    #time.sleep(100000)
-    #print d.count(1, 1.2)
-    """
+def prepareDistributionCounter():
+    d = EucDistanceCounter.EucDistanceCounter(2)
+    meanCounter = MeanCounter.MeanCounter()
+    varianceCounter = VarianceCounter.VarianceCounter()
+    tCounter = TCounter.TCunter(d)
+    return DistributionCounter.DistributionCounter(tCounter, meanCounter, varianceCounter)
 
-    distributionPlotter.plot(100, 10, 500)
+
 
 
 if __name__ == "__main__":

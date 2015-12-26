@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
-
+import matplotlib.mlab as mlab
+import numpy
 
 class DistributionPlotter:
     gen1 = None
@@ -22,6 +23,11 @@ class DistributionPlotter:
             disArr.append(result)
         n, bins, patches = plt.hist(disArr, 20, normed=1, facecolor='green', alpha=0.75)
 
+        sigma = numpy.std(bins)
+        mean = sum(bins) / float(len(bins))
+
+        y = mlab.normpdf(bins, mean, sigma)
+        l = plt.plot(bins, y, 'r--', linewidth=1)
         #plt.plot(bins)
         plt.show()
 
