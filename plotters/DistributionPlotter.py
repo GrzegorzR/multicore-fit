@@ -2,13 +2,12 @@ import matplotlib.pyplot as plt
 
 
 class DistributionPlotter:
-    xgen = None
     gen1 = None
     gen2 = None
     disCounter = None
 
-    def __init__(self, xgen, gen1, gen2, disCounter):
-        self.xgen = xgen
+    def __init__(self,gen1, gen2, disCounter):
+
         self.gen1 = gen1
         self.gen2 = gen2
         self.disCounter = disCounter
@@ -17,10 +16,9 @@ class DistributionPlotter:
         disArr = []
         for i in range(0, iterations):
             print i
-            xes = self.xgen.generate(arrLen)
-            arr1 = self.gen1.generate(xes)
-            arr2 = self.gen2.generate(xes)
-            result = self.disCounter.count(xes, arr1, arr2, k)
+            data1 = self.gen1.generateDataSample(arrLen)
+            data2 = self.gen2.generateDataSample(arrLen)
+            result = self.disCounter.count(data1, data2, k)
             disArr.append(result)
         n, bins, patches = plt.hist(disArr, 20, normed=1, facecolor='green', alpha=0.75)
 

@@ -12,12 +12,18 @@ class TCunter:
         pass
 
 
-    def countT(self,xArr, arr1, arr2,  k):
+    def countT(self, data1, data2, k):
         sumT = 0
+        xArr1 = data1.getX()
+        arr1 = data1.getY()
+
+        xArr2 = data2.getX()
+        arr2 = data2.getY()
+
         for i in range(0, len(arr1)):
             ithSum = 0
-            dis1 = self.eucDisCounter.countArr(arr1[i], xArr[i], xArr, arr1)
-            dis2 = self.eucDisCounter.countArr(arr1[i], xArr[i], xArr, arr2)
+            dis1 = self.eucDisCounter.countArr(arr1[i], xArr1[i], xArr1, arr1)
+            dis2 = self.eucDisCounter.countArr(arr1[i], xArr1[i], xArr2, arr2)
             for j in range(1, k+1):
                 #print dis1
                 #print dis2
@@ -27,8 +33,8 @@ class TCunter:
             sumT = sumT + ithSum
         for i in range(0, len(arr2)):
             ithSum = 0
-            dis1 = self.eucDisCounter.countArr(arr2[i], xArr[i], xArr, arr1)
-            dis2 = self.eucDisCounter.countArr(arr2[i], xArr[i], xArr, arr2)
+            dis1 = self.eucDisCounter.countArr(arr2[i], xArr2[i], xArr1, arr1)
+            dis2 = self.eucDisCounter.countArr(arr2[i], xArr2[i], xArr2, arr2)
             for j in range(1, k+1):
                 #print dis1
                 #print dis2
